@@ -3,10 +3,54 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
   <title>Época Viva BAQ | Turismo temático en Barranquilla</title>
+  <meta name="description" content="Época Viva BAQ ofrece turismo temático en Barranquilla con recorridos históricos, rutas nocturnas, experiencias vintage, eventos privados y transporte turístico cultural." />
+  <meta name="keywords" content="Época Viva BAQ, turismo en Barranquilla, turismo temático, recorridos históricos, bus temático, rutas nocturnas, eventos privados, turismo cultural Barranquilla" />
+  <meta name="author" content="Época Viva BAQ" />
+  <meta name="robots" content="index, follow" />
+  <link rel="canonical" href="https://epocavivabaq.com/" />
+  <meta name="theme-color" content="#7b5248" />
+
+  <meta property="og:locale" content="es_CO" />
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Época Viva BAQ | Turismo temático en Barranquilla" />
+  <meta property="og:description" content="Recorridos históricos, rutas nocturnas, experiencias vintage y eventos privados en Barranquilla." />
+  <meta property="og:url" content="https://epocavivabaq.com/" />
+  <meta property="og:site_name" content="Época Viva BAQ" />
+  <meta property="og:image" content="https://epocavivabaq.com/Logo.jpeg" />
+
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Época Viva BAQ | Turismo temático en Barranquilla" />
+  <meta name="twitter:description" content="Vive Barranquilla con experiencias temáticas, culturales y memorables." />
+  <meta name="twitter:image" content="https://epocavivabaq.com/Logo.jpeg" />
+
+  <link rel="icon" href="Logo.jpeg" type="image/jpeg" />
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "name": "Época Viva BAQ",
+    "url": "https://epocavivabaq.com/",
+    "logo": "https://epocavivabaq.com/Logo.jpeg",
+    "description": "Turismo temático en Barranquilla con recorridos históricos, culturales y experiencias a bordo de buses temáticos.",
+    "areaServed": "Barranquilla, Colombia",
+    "contactPoint": {
+      "@type": "ContactPoint",
+      "telephone": "+57 323 337 6159",
+      "contactType": "customer service",
+      "areaServed": "CO",
+      "availableLanguage": ["Spanish"]
+    },
+    "sameAs": [
+      "https://epocavivabaq.com/"
+    ]
+  }
+  </script>
   <style>
     :root {
       --primary: #7b5248;
@@ -503,6 +547,20 @@
       grid-template-columns: repeat(2, 1fr);
       gap: 1.5rem;
       margin-bottom: 2rem;
+    }
+
+    .experience-image {
+      margin: -1.6rem -1.6rem 1rem;
+      border-radius: 24px 24px 0 0;
+      overflow: hidden;
+      height: 240px;
+      background: #f7ecec;
+    }
+
+    .experience-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
     }
 
     .experience-card {
@@ -1325,18 +1383,33 @@
     </div>
   </footer>
 
-  <a class="whatsapp-float" href="https://wa.me/57302997049" target="_blank" rel="noopener noreferrer" aria-label="Abrir WhatsApp">
+  <a class="whatsapp-float" href="https://wa.me/573233376159" target="_blank" rel="noopener noreferrer" aria-label="Abrir WhatsApp">
     ✆
   </a>
 
   <script>
+    const whatsappNumber = "573233376159";
+
     const contactForm = document.getElementById('contactForm');
     const contactSuccess = document.getElementById('contactSuccess');
 
     contactForm.addEventListener('submit', function (e) {
       e.preventDefault();
+
+      const fields = contactForm.querySelectorAll('input, textarea');
+      const nombre = fields[0].value.trim();
+      const correo = fields[1].value.trim();
+      const telefono = fields[2].value.trim();
+      const asunto = fields[3].value.trim();
+      const mensaje = fields[4].value.trim();
+
+      const texto = `Hola, soy ${nombre}.%0A%0ACorreo: ${correo}%0ATeléfono: ${telefono || 'No proporcionado'}%0AAsunto: ${asunto || 'Consulta general'}%0A%0AMensaje:%0A${encodeURIComponent(mensaje)}`;
+      window.open(`https://wa.me/${whatsappNumber}?text=${texto}`, '_blank');
+
+      contactSuccess.textContent = 'Tu mensaje está listo para enviarse por WhatsApp.';
       contactSuccess.style.display = 'block';
       contactForm.reset();
+
       setTimeout(() => {
         contactSuccess.style.display = 'none';
       }, 4000);
@@ -1348,12 +1421,18 @@
     reservationForm.addEventListener('submit', function (e) {
       e.preventDefault();
 
-      const nombre = document.getElementById('nombreReserva').value;
+      const nombre = document.getElementById('nombreReserva').value.trim();
+      const correo = document.getElementById('correoReserva').value.trim();
       const fecha = document.getElementById('fechaReserva').value;
       const hora = document.getElementById('horaReserva').value;
       const servicio = document.getElementById('servicioReserva').value;
+      const personas = document.getElementById('personasReserva').value;
+      const nota = document.getElementById('notaReserva').value.trim();
 
-      reservationSuccess.textContent = `Gracias, ${nombre}. Tu reserva para ${servicio} ha sido registrada para el ${fecha} a las ${hora}.`;
+      const texto = `Hola, quiero reservar con Época Viva BAQ.%0A%0ANombre: ${encodeURIComponent(nombre)}%0ACorreo: ${encodeURIComponent(correo)}%0AExperiencia: ${encodeURIComponent(servicio)}%0AFecha: ${encodeURIComponent(fecha)}%0AHora: ${encodeURIComponent(hora)}%0APersonas: ${encodeURIComponent(personas)}%0ADetalles: ${encodeURIComponent(nota || 'Sin detalles adicionales')}`;
+      window.open(`https://wa.me/${whatsappNumber}?text=${texto}`, '_blank');
+
+      reservationSuccess.textContent = `Gracias, ${nombre}. Tu solicitud de reserva para ${servicio} está lista para enviarse por WhatsApp.`;
       reservationSuccess.style.display = 'block';
       reservationForm.reset();
 
